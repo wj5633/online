@@ -16,11 +16,17 @@ Including another URLconf
 from django.conf.urls import url
 # from django.contrib import admin
 import xadmin
-xadmin.autodiscover()
-
+from django.views.generic import TemplateView
 from xadmin.plugins import xversion
+
+from users.views import sign_in
+
+xadmin.autodiscover()
 xversion.register_models()
+
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
+    url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
+    url(r'^login/$', sign_in, name="login"),
 ]
