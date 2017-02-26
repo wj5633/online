@@ -19,7 +19,7 @@ import xadmin
 from django.views.generic import TemplateView
 from xadmin.plugins import xversion
 
-from users.views import sign_in
+from users.views import LoginView
 
 xadmin.autodiscover()
 xversion.register_models()
@@ -28,5 +28,5 @@ xversion.register_models()
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
-    url(r'^login/$', sign_in, name="login"),
+    url(r'^login/$', LoginView.as_view(), name="login"),
 ]
