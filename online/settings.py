@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'operation',
     'crispy_forms',
     'xadmin',
-    'reversion'
+    'reversion',
+    'captcha',
 ]
 
 AUTH_USER_MODEL = "users.UserProfile"
@@ -142,3 +143,10 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
+
+EMAIL_HOST = "smtp.163.com"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = "wangjie5633@163.com"
+EMAIL_HOST_PASSWORD = 'wj4766'
+EMAIL_USE_TLS = False
+EMAIL_FROM = "wangjie5633@163.com"

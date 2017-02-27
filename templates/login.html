@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+{% load staticfiles %}
 <head>
 	<meta charset="UTF-8">
     <meta name="renderer" content="webkit">
@@ -40,8 +40,8 @@
             <p class="fl hd-tips">慕学在线网，在线学习平台！</p>
             <ul class="fr hd-bar">
                 <li>服务电话：<span>33333333</span></li>
-                <li class="active"><a href="login.html">[登录]</a></li>
-                <li><a href="register.html">[注册]</a></li>
+                <li class="active"><a href="{% url 'login' %}">[登录]</a></li>
+                <li><a href="{% url 'register' %}">[注册]</a></li>
             </ul>
         </div>
     </div>
@@ -50,9 +50,9 @@
     <div class="c-box bg-box">
         <div class="login-box clearfix">
             <div class="hd-login clearfix">
-                <a class="index-logo" href="index.html"></a>
+                <a class="index-logo" href="{% url 'index' %}"></a>
                 <h1>用户登录</h1>
-                <a class="index-font" href="index.html">回到首页</a>
+                <a class="index-font" href="{% url 'index' %}">回到首页</a>
             </div>
             <div class="fl slide">
                 <div class="imgslide">
@@ -67,7 +67,7 @@
             </div>
             <div class="fl form-box">
                 <h2>帐号登录</h2>
-                <form action="" method="post" autocomplete="off">
+                <form action="{% url 'login' %}" method="post" autocomplete="off">
                     {% csrf_token %}
                     <div class="form-group marb20 {% if login_form.errors.username %}errorput{% endif %}">
                         <label>用&nbsp;户&nbsp;名</label>
