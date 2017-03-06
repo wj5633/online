@@ -1882,7 +1882,7 @@ textarea:focus {
 .group_list .box {
     height: 300px;
     border: 1px solid #ccc;
-    width: 233px;
+    width: 223px;
     float: left;
     overflow: hidden;
     position: relative;
@@ -2663,7 +2663,7 @@ footer .footer .line {
 }
 
 .list .left {
-    width: 900px;
+    width: 910px;
     float: left;
 }
 
@@ -2794,7 +2794,7 @@ footer .footer .line {
 }
 
 .list .group_list .box {
-    width: 280px;
+    width: 275px;
     height: 320px;
     margin: 3px;
     overflow: hidden;
