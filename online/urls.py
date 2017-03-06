@@ -17,9 +17,12 @@ from django.conf.urls import url, include
 # from django.contrib import admin
 import xadmin
 from django.views.generic import TemplateView
+from django.views.static import serve
 from xadmin.plugins import xversion
 
-from users.views import LoginView, RegisterView, ActiveUserView
+from online.settings import MEDIA_ROOT
+from organization.views import OrgView
+from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyView
 
 xadmin.autodiscover()
 xversion.register_models()
@@ -31,5 +34,18 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^register/$', RegisterView.as_view(), name="register"),
     url(r'^captcha/', include('captcha.urls')),
-    url(r'active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name='user_active')
+    url(r'active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name='user_active'),
+    url(r'forget/$', ForgetPwdView.as_view(), name='forget_pwd'),
+    url(r'modify_pwd/$', ModifyView.as_view(), name='modify_pwd'),
+    url(r'reset/(?P<reset_code>.*)/$', ResetView.as_view(), name='reset_pwd'),
+
+    # organization
+    url(r'^org/', include('organization.urls', namespace='org')),
+
+    # course
+    url(r'^course/', include('courses.urls', namespace='course')),
+
+    # media
+    url(r'media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
+
 ]
