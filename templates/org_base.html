@@ -27,12 +27,12 @@
                         <!--登录后跳转-->
                         <div class="personal">
                             <dl class="user fr">
-                                <dd>{{ user.username }}<img class="down fr" src="/static/images/top_down.png"/></dd>
-                                <dt><img width="20" height="20" src="../media/image/2016/12/default_big_14.png"/></dt>
+                                <dd>{{ user.username }}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
+                                <dt><img width="20" height="20" src="{{ MEDIA_URL }}{{ user.image }}"/></dt>
                             </dl>
                             <div class="userdetail">
                                 <dl>
-                                    <dt><img width="80" height="80" src="../media/image/2016/12/default_big_14.png"/>
+                                    <dt><img width="80" height="80" src="{{ MEDIA_URL }}{{ user.image }}"/>
                                     </dt>
                                     <dd>
                                         <h2>django</h2>
@@ -41,7 +41,7 @@
                                 </dl>
                                 <div class="btn">
                                     <a class="personcenter fl" href="usercenter-info.html">进入个人中心</a>
-                                    <a class="fr" href="/xadmin/logout/">退出</a>
+                                    <a class="fr" href="{% url 'logout' %}">退出</a>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
             {% else %}
                 <div class="top">
                     <div class="wp">
-                        <div class="fl"><p>服务电话：<b>33333333</b></p></div>
+                        <div class="fl"><p>服务电话：<b>4001008031</b></p></div>
                         <!--登录后跳转-->
                         <a style="color:white" class="fr registerbtn" href="{% url 'register' %}">注册</a>
                         <a style="color:white" class="fr loginbtn" href="{% url 'login' %}">登录</a>
@@ -60,7 +60,7 @@
 
             <div class="middle companyheader">
                 <div class="wp">
-                    <img class="fl" style="width: 112px;height: 103px" src="{{ MEDIA_URL }}{{ course_org.image }}"/>
+                    <img class="fl" style="width: 112px;height: 100px;padding-top: 10px;" src="{{ MEDIA_URL }}{{ course_org.image }}"/>
                     <div class="head fl">
                         <h1>
                             {{ course_org.name }}
