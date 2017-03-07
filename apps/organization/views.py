@@ -1,11 +1,14 @@
 # -*-coding=utf-8-*-
 from __future__ import unicode_literals
 import json
+
+from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import View
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 
+from courses.models import Course
 from operation.models import UserFavorite
 from .models import CourseOrg, CityDict, Teacher
 from .forms import UserAskForm
@@ -21,6 +24,12 @@ class OrgView(View):
         all_orgs = CourseOrg.objects.all()
         all_citys = CityDict.objects.all()
         hot_orgs = all_orgs.order_by("-click_nums")[:3]
+
+        # search
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:
+            all_orgs = all_orgs.filter(Q(name__icontains=search_keywords)|
+                                       Q(desc__icontains=search_keywords))
 
         # city
         city_id = request.GET.get('city', '')
@@ -77,10 +86,11 @@ class OrgHomeView(View):
     """
     机构首页
     """
-
     def get(self, request, org_id):
         current_page = 'home'
         course_org = CourseOrg.objects.get(id=int(org_id))
+        course_org.click_nums += 1
+        course_org.save()
         all_courses = course_org.course_set.all()[:3]
         all_teachers = course_org.teacher_set.all()[:1]
         has_fav = False
@@ -125,7 +135,6 @@ class OrgTeacherView(View):
     """
     机构讲师列表
     """
-
     def get(self, request, org_id):
         current_page = 'teacher'
         course_org = CourseOrg.objects.get(id=int(org_id))
@@ -156,6 +165,24 @@ class AddFavView(View):
         if exit_records:
             # 如果已经存在,表示取消收藏
             exit_records.delete()
+            if int(fav_type) == 1:
+                course = Course.objects.get(id=int(fav_id))
+                course.fav_nums -= 1
+                if course.fav_nums < 0:
+                    course.fav_nums = 0
+                course.save()
+            elif int(fav_type) == 2:
+                course_org = CourseOrg.objects.get(id=int(fav_id))
+                course_org.fav_nums -= 1
+                if course_org.fav_nums < 0:
+                    course_org.fav_nums = 0
+                course_org.save()
+            elif int(fav_type) == 3:
+                teacher = Teacher.objects.get(id=int(fav_id))
+                teacher.fav_nums -= 1
+                if teacher.fav_nums < 0:
+                    teacher.fav_nums = 0
+                teacher.save()
             return HttpResponse('{"status":"success", "msg":"收藏"}',
                                 content_type='application/json')
         else:
@@ -165,6 +192,19 @@ class AddFavView(View):
                 user_fav.fav_id = int(fav_id)
                 user_fav.fav_type = int(fav_type)
                 user_fav.save()
+
+                if int(fav_type) == 1:
+                    course = Course.objects.get(id=int(fav_id))
+                    course.fav_nums += 1
+                    course.save()
+                elif int(fav_type) == 2:
+                    course_org = CourseOrg.objects.get(id=int(fav_id))
+                    course_org.fav_nums += 1
+                    course_org.save()
+                elif int(fav_type) == 3:
+                    teacher = Teacher.objects.get(id=int(fav_id))
+                    teacher.fav_nums += 1
+                    teacher.save()
                 return HttpResponse('{"status":"success", "msg":"已收藏"}',
                                     content_type='application/json')
             else:
@@ -179,6 +219,12 @@ class TeacherListView(View):
     def get(self, request):
         all_teachers = Teacher.objects.all()
 
+        # search
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:
+            all_teachers = all_teachers.filter(Q(name__icontains=search_keywords)|
+                                               Q(work_company__icontains=search_keywords)|
+                                               Q(work_position__icontains=search_keywords))
         # sort
         sort = request.GET.get('sort', '')
         if sort:
@@ -202,8 +248,7 @@ class TeacherListView(View):
 class TeacherDetailView(View):
     """
         讲师详情页
-        """
-
+    """
     def get(self, request, teacher_id):
         teacher = Teacher.objects.get(id=int(teacher_id))
         teacher.click_nums += 1

@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from __future__ import unicode_literals
 
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import View
@@ -12,7 +13,7 @@ from utils.mixin_utils import LoginRequireMixin
 from operation.models import UserFavorite
 
 
-class CourseView(View):
+class CourseListView(View):
     """
     课程列表
     """
@@ -20,6 +21,12 @@ class CourseView(View):
         all_courses = Course.objects.all().order_by("-add_time")
         # hot_course
         hot_courses = Course.objects.all().order_by("-click_nums")[:3]
+        # search
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:
+            all_courses = all_courses.filter(Q(name__icontains=search_keywords)|
+                                             Q(desc__icontains=search_keywords)|
+                                             Q(detail__icontains=search_keywords))
 
         # sort
         sort = request.GET.get('sort', '')
@@ -79,6 +86,8 @@ class CourseInfoView(LoginRequireMixin, View):
     """
     def get(self, request, course_id):
         course = Course.objects.get(id=int(course_id))
+        course.students += 1
+        course.save()
         # 查询是否学习该课程
         user_courses = UserCourse.objects.filter(user=request.user, course=course)
         if not user_courses:

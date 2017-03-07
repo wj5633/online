@@ -61,9 +61,9 @@
     <div class="c-box bg-box">
         <div class="login-box clearfix">
             <div class="hd-login clearfix">
-                <a class="index-logo" href="index.html"></a>
+                <a class="index-logo" href="{% url 'index' %}"></a>
                 <h1>忘记密码</h1>
-                <a class="index-font" href="index.html">回到首页</a>
+                <a class="index-font" href="{% url 'index' %}">回到首页</a>
             </div>
             <div class="fl slide">
                 <div class="imgslide">
@@ -98,7 +98,7 @@
                     </div>
                     <input type="hidden" name="sms_type" value="1">
                     <input class="btn btn-green" id="jsFindPwdBtn" type="submit" value="提交" />
-                    <p class="form-p" style="bottom:40px;">您还可以<a href="login.html"> [直接登录]</a></p>
+                    <p class="form-p" style="bottom:40px;">您还可以<a href="{% url 'login' %}"> [直接登录]</a></p>
                 </form>
             </div>
         </div>

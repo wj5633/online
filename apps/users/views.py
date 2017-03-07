@@ -1,7 +1,8 @@
 # -*-coding=utf-8-*-
 from django.contrib.auth.hashers import make_password
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 from django.views.generic.base import View
@@ -23,6 +24,16 @@ class CustomBackend(ModelBackend):
                 return user
         except Exception as e:
             return None
+
+
+class LogoutView(View):
+    """
+    用户登出
+    """
+    def get(self, request):
+        logout(request)
+        from django.core.urlresolvers import reverse
+        return HttpResponseRedirect(reverse("index"))
 
 
 class LoginView(View):

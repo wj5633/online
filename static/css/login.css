@@ -57,7 +57,7 @@ a:hover {
 
 .login-box {
     width: 853px;
-    margin: 150px auto;
+    margin: 20px auto;
 }
 
 .hd-login {
@@ -266,7 +266,7 @@ a:hover {
 
 .form-group {
     position: relative;
-    width: 288px;
+    width: 290px;
     height: 38px;
     border: 1px solid #dedede;
     -webkit-border-radius: 3px;
