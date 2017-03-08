@@ -62,6 +62,9 @@ class Teacher(models.Model):
         verbose_name = "教师"
         verbose_name_plural = verbose_name
 
+    def get_teacher_course_nums(self):
+        return self.course_set.count()
+
     def get_teacher_courses(self):
         return self.course_set.all()
 
