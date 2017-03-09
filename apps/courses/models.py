@@ -18,6 +18,7 @@ class Course(models.Model):
     category = models.CharField("课程类别", max_length=20, default="Python")
     degree = models.CharField("难度", choices=(("cj", "初级"), ("zj", "中级"), ("gj", "高级")),
                               max_length=5)
+    is_banner = models.BooleanField(default=False, verbose_name="是否是轮播图")
     learn_times = models.IntegerField(default=0, verbose_name="时长")
     students = models.IntegerField(default=0, verbose_name="学习人数")
     fav_nums = models.IntegerField(default=0, verbose_name="收藏")

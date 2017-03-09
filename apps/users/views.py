@@ -6,6 +6,7 @@ import json
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
@@ -18,7 +19,7 @@ from operation.models import UserCourse, UserFavorite, UserMessage
 from organization.models import CourseOrg, Teacher
 from utils.email_send import send_register_email
 from utils.mixin_utils import LoginRequireMixin
-from .models import UserProfile, EmailVerifyRecord
+from .models import UserProfile, EmailVerifyRecord, Banner
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyForm, UploadImageForm, UserInfoForm
 
 
@@ -42,7 +43,7 @@ class LogoutView(View):
     """
     def get(self, request):
         logout(request)
-        from django.core.urlresolvers import reverse
+
         return HttpResponseRedirect(reverse("index"))
 
 
@@ -59,7 +60,7 @@ class LoginView(View):
             if user is not None:
                 # if user.is_active:
                 login(request, user)
-                return render(request, 'index.html')
+                return HttpResponseRedirect(reverse('index'))
                 # else:
                 #     return render(request, 'login.html', {"msg": "用户未激活", 'login_form': login_form})
             else:
@@ -314,7 +315,7 @@ class MyMassageView(LoginRequireMixin, View):
     我的消息
     """
     def get(self, request):
-        all_messages = UserMessage.objects.all()
+        all_messages = UserMessage.objects.filter(user=request.user.id)
         # num
         message_nums = all_messages.count()
         # page
@@ -327,3 +328,34 @@ class MyMassageView(LoginRequireMixin, View):
         messages = p.page(page)
 
         return render(request, 'usercenter-message.html', locals())
+
+
+class IndexView(View):
+    def get(self, request):
+        all_banners = Banner.objects.all().order_by("index")
+        courses = Course.objects.filter(is_banner=False)[:6]
+        banner_courses = Course.objects.filter(is_banner=True)[:3]
+        course_orgs = CourseOrg.objects.all()[:15]
+
+        return render(request, 'index.html', locals())
+
+
+def page_not_found(request):
+    from django.shortcuts import render_to_response
+    response = render_to_response('404.html', {})
+    response.status_code = 404
+    return response
+
+
+def page_error(request):
+    from django.shortcuts import render_to_response
+    response = render_to_response('500.html', {})
+    response.status_code = 500
+    return response
+
+
+def method_not_allowed(request):
+    from django.shortcuts import render_to_response
+    response = render_to_response('403.html', {})
+    response.status_code = 403
+    return response
