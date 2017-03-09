@@ -16,7 +16,7 @@ class UserProfile(AbstractUser):
     image = models.ImageField("头像", upload_to="image/%Y/%m", default="image/default.png", max_length=100)
 
     class Meta:
-        verbose_name = "用户信息"
+        verbose_name = "用户"
         verbose_name_plural = verbose_name
 
     def unread_nums(self):

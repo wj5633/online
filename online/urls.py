@@ -19,7 +19,8 @@ import xadmin
 from django.views.static import serve
 from xadmin.plugins import xversion
 
-from online.settings import MEDIA_ROOT, STATIC_ROOT
+from online.settings import MEDIA_ROOT
+# from online.settings import STATIC_ROOT
 from users.views import LoginView, RegisterView, ActiveUserView, IndexView
 from users.views import ForgetPwdView, ResetView, ModifyView, LogoutView
 
@@ -49,7 +50,7 @@ urlpatterns = [
 
     # media
     url(r'media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
-    url(r'static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
+    # url(r'static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
 
 ]
 
