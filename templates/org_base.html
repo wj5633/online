@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/queryCity/css/cityLayout.cs' %}s">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/queryCity/css/cityLayout.css' %}">
     {% block custom_css %}{% endblock %}
     <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
@@ -23,28 +23,31 @@
             {% if request.user.is_authenticated %}
                 <div class="top">
                     <div class="wp">
-                        <div class="fl"><p>服务电话：<b>33333333</b></p></div>
+                        <div class="fl"><p>服务电话：<b>4001008031</b></p></div>
                         <!--登录后跳转-->
                         <div class="personal">
                             <dl class="user fr">
-                                <dd>{{ user.username }}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
-                                <dt><img width="20" height="20" src="{{ MEDIA_URL }}{{ user.image }}"/></dt>
+                                <dd>{{ request.user.username }}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
+                                <dt><img width="20" height="20" src="{{ MEDIA_URL }}{{ request.user.image }}"/></dt>
                             </dl>
                             <div class="userdetail">
                                 <dl>
-                                    <dt><img width="80" height="80" src="{{ MEDIA_URL }}{{ user.image }}"/>
+                                    <dt><img width="80" height="80" src="{{ MEDIA_URL }}{{ request.user.image }}"/>
                                     </dt>
                                     <dd>
-                                        <h2>django</h2>
-                                        <p>{{ user.username }}</p>
+                                        <h2>{{ request.user.nick_name }}</h2>
+                                        <p>{{ request.user.username }}</p>
                                     </dd>
                                 </dl>
                                 <div class="btn">
-                                    <a class="personcenter fl" href="usercenter-info.html">进入个人中心</a>
+                                    <a class="personcenter fl" href="{% url 'users:user_info' %}">进入个人中心</a>
                                     <a class="fr" href="{% url 'logout' %}">退出</a>
                                 </div>
                             </div>
                         </div>
+                        <a href="{% url 'users:mymessage' %}">
+                            <div class="msg-num"><span id="MsgNum">{{ request.user.unread_nums }}</span></div>
+                        </a>
                     </div>
                 </div>
             {% else %}
@@ -74,7 +77,7 @@
                         </p>
                     </div>
                     <div class="btn fr collectionbtn  notlogin" data-favid="22" data-fav-type="1">
-                        {% if has_fav %}收藏{% else %}已收藏{% endif %}
+                        {% if has_fav %}已收藏{% else %}收藏{% endif %}
                     </div>
 
                 </div>

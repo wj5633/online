@@ -9,6 +9,7 @@ from django.db import models
 class CourseOrg(models.Model):
     city = models.ForeignKey('CityDict', verbose_name="所在城市")
     name = models.CharField(max_length=50, verbose_name="机构名称")
+    tag = models.CharField(max_length=10, default='全国知名', verbose_name="机构标签")
     desc = models.TextField(verbose_name="机构描述")
     category = models.CharField('类别',default="pxjg", max_length=20, choices=(
         ("pxjg", "培训机构"), ("gr", "个人"), ("gx", "高校")
@@ -61,6 +62,9 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = "教师"
         verbose_name_plural = verbose_name
+
+    def get_teacher_course_nums(self):
+        return self.course_set.count()
 
     def get_teacher_courses(self):
         return self.course_set.all()

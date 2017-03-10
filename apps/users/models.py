@@ -16,8 +16,12 @@ class UserProfile(AbstractUser):
     image = models.ImageField("头像", upload_to="image/%Y/%m", default="image/default.png", max_length=100)
 
     class Meta:
-        verbose_name = "用户信息"
+        verbose_name = "用户"
         verbose_name_plural = verbose_name
+
+    def unread_nums(self):
+        from operation.models import UserMessage
+        return UserMessage.objects.filter(user=self.id).filter(has_read=False).count()
 
     def __str__(self):
         return self.username
@@ -26,7 +30,9 @@ class UserProfile(AbstractUser):
 class EmailVerifyRecord(models.Model):
     code = models.CharField("验证码", max_length=20)
     email = models.EmailField("验证邮箱", max_length=50)
-    send_type = models.CharField("类型", max_length=10, choices=(("register", "注册"), ("forget", "找回密码")))
+    send_type = models.CharField("类型", max_length=20, choices=(("register", "注册"),
+                                                               ("forget", "找回密码"),
+                                                               ("update_email", "修改邮箱")))
     send_time = models.DateTimeField("发送时间", default=datetime.now)
 
     class Meta:

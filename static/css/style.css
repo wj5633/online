@@ -4253,7 +4253,7 @@ footer .footer .line {
 .personal_list .brief .des .key {
     background: url(../images/authentication.png) no-repeat left center;
     padding: 30px;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     color: #ff7800;
     font-size: 14px;
 }
@@ -4972,7 +4972,7 @@ footer .footer .line {
 
 .butler_list.company dd .pic {
     vertical-align: top;
-    margin-top: 25px;
+    margin-top: 20px;
     margin-left: 10px;
 }
 
@@ -6398,7 +6398,7 @@ footer .footer .line {
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid #eee;
-    margin: 50px auto 20px;
+    margin: 40px auto 20px;
 }
 
 .personal_des .inforcon .left .pic img {

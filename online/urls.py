@@ -16,12 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 # from django.contrib import admin
 import xadmin
-from django.views.generic import TemplateView
 from django.views.static import serve
 from xadmin.plugins import xversion
 
 from online.settings import MEDIA_ROOT
-from users.views import LoginView, RegisterView, ActiveUserView
+# from online.settings import STATIC_ROOT
+from users.views import LoginView, RegisterView, ActiveUserView, IndexView
 from users.views import ForgetPwdView, ResetView, ModifyView, LogoutView
 
 xadmin.autodiscover()
@@ -30,7 +30,7 @@ xversion.register_models()
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
-    url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
+    url(r'^$', IndexView.as_view(), name="index"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^logout/$', LogoutView.as_view(), name="logout"),
     url(r'^register/$', RegisterView.as_view(), name="register"),
@@ -42,11 +42,21 @@ urlpatterns = [
 
     # organization
     url(r'^org/', include('organization.urls', namespace='org')),
+    # organization
+    url(r'^users/', include('users.urls', namespace='users')),
 
     # course
     url(r'^course/', include('courses.urls', namespace='course')),
 
     # media
     url(r'media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
+    # url(r'static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
 
 ]
+
+
+handler404 = 'users.views.page_not_found'
+
+handler500 = 'users.views.page_error'
+
+handler403 = 'users.views.method_not_allowed'
