@@ -152,7 +152,7 @@ MEDIA_URL = QINIU_BUCKET_DOMAIN + '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
-# STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
+STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 25
