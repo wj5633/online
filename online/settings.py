@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'reversion',
     'captcha',
     'pure_pagination',
+    'DjangoUeditor',
 ]
 
 AUTH_USER_MODEL = "users.UserProfile"
@@ -131,17 +132,27 @@ USE_L10N = True
 
 USE_TZ = False
 
+# qiniu
+QINIU_ACCESS_KEY='zPObn7m8F5RZ1dF9ktbh48Wivz7WE89rWL1sA_Zt'
+QINIU_SECRET_KEY='sLdn1AkrebELj-vdFIZ3s6ScmV3LRP13P-qShZEf'
+QINIU_BUCKET_NAME='wj5633'
+QINIU_BUCKET_DOMAIN='http://ompehspge.bkt.clouddn.com/'
+QINIU_SECURE_URL = False
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_URL = '/media/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = QINIU_BUCKET_DOMAIN + '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+# STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 25
@@ -149,3 +160,4 @@ EMAIL_HOST_USER = "wangjie5633@163.com"
 EMAIL_HOST_PASSWORD = 'wj4766'
 EMAIL_USE_TLS = False
 EMAIL_FROM = "wangjie5633@163.com"
+

@@ -27,7 +27,6 @@ from users.views import ForgetPwdView, ResetView, ModifyView, LogoutView
 xadmin.autodiscover()
 xversion.register_models()
 
-
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^$', IndexView.as_view(), name="index"),
@@ -52,8 +51,8 @@ urlpatterns = [
     url(r'media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
     # url(r'static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
 
+    url(r'^ueditor/', include('DjangoUeditor.urls')),
 ]
-
 
 handler404 = 'users.views.page_not_found'
 

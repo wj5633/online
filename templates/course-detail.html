@@ -58,23 +58,24 @@
                                 <div class="btn colectgroupbtn" id="jsLeftBtn">
                                     {% if has_fav_course %}已收藏{% else %}收藏{% endif %}
                                 </div>
-                                <div class="buy btn"><a style="color: white" href="{% url 'course:course_info' course.id %}">开始学习</a></div>
+                                <div class="buy btn"><a style="color: white"
+                                                        href="{% url 'course:course_info' course.id %}">开始学习</a></div>
                             </div>
                         </div>
                         <div class="group-share-box">
-                            <div class="bdsharebuttonbox"
-                                 data-text="django开始了"
-                                 data-desc="我在#慕课网#发现了"
-                                 data-comment=""
-                                 data-url="/group/groupdetail/15/">
-                                <span class="fl">分享到：</span>
-                                <a href="#" class="bds_more" data-cmd="more"></a>
-                                <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
-                                <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
-                                <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
-                                <a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
-                                <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
-                            </div>
+                            <div class="bshare-custom"><a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto"
+                                                          class="bshare-more">分享到</a><a title="分享到QQ空间"
+                                                                                        class="bshare-qzone">QQ空间</a><a
+                                    title="分享到新浪微博" class="bshare-sinaminiblog">新浪微博</a><a title="分享到人人网"
+                                                                                           class="bshare-renren">人人网</a><a
+                                    title="分享到腾讯微博" class="bshare-qqmb">腾讯微博</a><a title="分享到网易微博"
+                                                                                   class="bshare-neteasemb">网易微博</a><a
+                                    title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span
+                                    class="BSHARE_COUNT bshare-share-count">0</span></div>
+                            <script type="text/javascript" charset="utf-8"
+                                    src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+                            <script type="text/javascript" charset="utf-8"
+                                    src="http://static.bshare.cn/b/bshareC0.js"></script>
                         </div>
                     </div>
                     <div class="right">
@@ -83,12 +84,12 @@
                             <p>世界名校，课程权威</p>
                         </div>
                         <div class="pic">
-                            <a href="/company/14/">
+                            <a href="{% url 'org:org_home' course.course_org.id %}">
                                 <img width="150" height="80" src="{{ MEDIA_URL }}{{ course.course_org.image }}"/>
                             </a>
                         </div>
-                        <a href="/company/14/">
-                            <h2 class="center" title="清华大学">{{ course.course_org.name }}</h2>
+                        <a href="{% url 'org:org_home' course.course_org.id %}">
+                            <h2 class="center" title="{{ course.course_org.name }}">{{ course.course_org.name }}</h2>
                         </a>
                         <div class="btn  notlogin" data-favid="14" id="jsRightBtn">
                             {% if has_fav_org %}已收藏{% else %}收藏{% endif %}
@@ -96,14 +97,14 @@
                         <div class="clear">
                             <ul>
                                 <li>
-                                    <span>课 &nbsp;程&nbsp; 数：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ course.course_org.course_nums }}</span>
+                                    <span>课 &nbsp;程&nbsp; 数：&nbsp;&nbsp;&nbsp;&nbsp; {{ course.course_org.course_nums }}</span>
                                 </li>
                                 <li>
-                                    <span>教 &nbsp;师&nbsp; 数：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ course.course_org.get_teacher_nums }}</span>
+                                    <span>教 &nbsp;师&nbsp; 数：&nbsp;&nbsp;&nbsp;&nbsp {{ course.course_org.get_teacher_nums }}</span>
                                 </li>
                                 <li>所在地区：&nbsp;&nbsp;{{ course.course_org.address }}</li>
                                 <li>认&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;证&nbsp;:
-                                    &nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                     <img title="金牌机构" , src="{% static 'images/gold.png' %}"/>
                                 </li>
                             </ul>
@@ -123,7 +124,9 @@
                         </ul>
                     </div>
                     <div class="tab_cont tab_cont1">
-                        {{ course.detail }}
+                        {% autoescape off %}
+                            {{ course.detail }}
+                        {% endautoescape %}
                     </div>
                     <div class="tab_cont tab_cont2">
                         <div class="comment">

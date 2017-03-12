@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from datetime import datetime
 
+from DjangoUeditor.models import UEditorField
 from django.db import models
 from organization.models import CourseOrg, Teacher
 
@@ -14,7 +15,9 @@ class Course(models.Model):
     teacher = models.ForeignKey(Teacher, verbose_name="课程讲师", null=True, blank=True)
     name = models.CharField(max_length=50, verbose_name="课程名")
     desc = models.CharField(max_length=300, verbose_name="课程描述")
-    detail = models.TextField(verbose_name="课程详情")
+    detail = UEditorField('课程详情', width=600, height=300, toolbars="full", imagePath="course/ueditor/",
+                          filePath="course/ueditor/", upload_settings={"imageMaxSize": 1204000}, settings={},
+                          command=None, event_handler='', blank=True, default="")
     category = models.CharField("课程类别", max_length=20, default="Python")
     degree = models.CharField("难度", choices=(("cj", "初级"), ("zj", "中级"), ("gj", "高级")),
                               max_length=5)
@@ -31,11 +34,13 @@ class Course(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_course"
         verbose_name = "课程"
         verbose_name_plural = verbose_name
 
     def get_lesson_nums(self):
         return self.lesson_set.all().count()
+    get_lesson_nums.short_description = "章节数"
 
     def get_learn_users(self):
         return self.usercourse_set.all()[:5]
@@ -44,8 +49,21 @@ class Course(models.Model):
         # 获取所以章节
         return self.lesson_set.all()
 
+    def go_to(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe("<a href='http://www.baidu.com'>跳转</a>")
+    go_to.short_description = "跳转"
+
     def __unicode__(self):
         return self.name
+
+
+class BannerCourse(Course):
+    db_table = "mx_course_banner"
+    class Meta:
+        verbose_name = "轮播图"
+        verbose_name_plural = verbose_name
+        proxy = True # 不生成表
 
 
 class Lesson(models.Model):
@@ -54,6 +72,7 @@ class Lesson(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_course_lesson"
         verbose_name = "章节"
         verbose_name_plural = verbose_name
 
@@ -73,6 +92,7 @@ class Video(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_course_video"
         verbose_name = "视频"
         verbose_name_plural = verbose_name
 
@@ -87,6 +107,7 @@ class CourseResource(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_course_resource"
         verbose_name = "资源"
         verbose_name_plural = verbose_name
 
