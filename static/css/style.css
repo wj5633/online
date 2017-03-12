@@ -8417,8 +8417,8 @@ table .upload-btn {
 
 .group-share-box {
     position: absolute;
-    left: 0;
-    bottom: 15px;
+    left: 480px;
+    bottom: 5px;
 }
 
 /**公共样式start**/

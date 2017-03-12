@@ -58,6 +58,8 @@ class EmailVerifyRecordAdmin(object):
     # 筛选
     list_filter = ('email', 'send_type', 'send_time')
 
+    model_icon = 'fa fa-user'
+
 
 class BannerAdmin(object):
     list_display = ('title', 'image', 'url', 'index', 'add_time')

@@ -16,6 +16,7 @@ class UserProfile(AbstractUser):
     image = models.ImageField("头像", upload_to="image/%Y/%m", default="image/default.png", max_length=100)
 
     class Meta:
+        db_table = "mx_user"
         verbose_name = "用户"
         verbose_name_plural = verbose_name
 
@@ -36,6 +37,7 @@ class EmailVerifyRecord(models.Model):
     send_time = models.DateTimeField("发送时间", default=datetime.now)
 
     class Meta:
+        db_table = "mx_verifycode"
         verbose_name = "邮箱验证码"
         verbose_name_plural = verbose_name
 
@@ -51,5 +53,6 @@ class Banner(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_banner"
         verbose_name = "轮播图"
         verbose_name_plural = verbose_name

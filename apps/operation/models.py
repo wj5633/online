@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from __future__ import unicode_literals
 from datetime import datetime
 
 from django.db import models
@@ -14,6 +15,7 @@ class UserAsk(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_user_ask"
         verbose_name = "用户咨询"
         verbose_name_plural = verbose_name
 
@@ -29,6 +31,7 @@ class CourseComments(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_course_comment"
         verbose_name = "课程评论"
         verbose_name_plural = verbose_name
 
@@ -44,6 +47,7 @@ class UserFavorite(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_course_favorite"
         verbose_name = "用户收藏"
         verbose_name_plural = verbose_name
 
@@ -58,6 +62,7 @@ class UserMessage(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_course_message"
         verbose_name = "用户消息"
         verbose_name_plural = verbose_name
 
@@ -71,6 +76,7 @@ class UserCourse(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
+        db_table = "mx_course_course"
         verbose_name = "用户课程"
         verbose_name_plural = verbose_name
 

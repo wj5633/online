@@ -22,7 +22,6 @@ from utils.mixin_utils import LoginRequireMixin
 from .models import UserProfile, EmailVerifyRecord, Banner
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyForm, UploadImageForm, UserInfoForm
 
-
 # Create your views here.
 
 
