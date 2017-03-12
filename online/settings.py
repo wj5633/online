@@ -25,9 +25,12 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = 'uo7xxfb%z92cd^=x+h#&6ceh)tie-urb1o5lyo%&!biv710g+c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1']
+import getpass
+if os.name == 'nt':
+    DEBUG = True
+else:
+    DEBUG = False
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 AUTHENTICATION_BACKENDS = (
@@ -133,23 +136,25 @@ USE_L10N = True
 USE_TZ = False
 
 # qiniu
-QINIU_ACCESS_KEY='zPObn7m8F5RZ1dF9ktbh48Wivz7WE89rWL1sA_Zt'
-QINIU_SECRET_KEY='sLdn1AkrebELj-vdFIZ3s6ScmV3LRP13P-qShZEf'
-QINIU_BUCKET_NAME='wj5633'
-QINIU_BUCKET_DOMAIN='http://ompehspge.bkt.clouddn.com/'
+QINIU_ACCESS_KEY = 'zPObn7m8F5RZ1dF9ktbh48Wivz7WE89rWL1sA_Zt'
+QINIU_SECRET_KEY = 'sLdn1AkrebELj-vdFIZ3s6ScmV3LRP13P-qShZEf'
+QINIU_BUCKET_NAME = 'wj5633'
+QINIU_BUCKET_DOMAIN = 'ompehspge.bkt.clouddn.com/'
 QINIU_SECURE_URL = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
+PREFIX_URL = 'http://'
 
-STATIC_URL = '/static/'
-
+STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
+# STATIC_URL = '/static/'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static')
 # ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_URL = QINIU_BUCKET_DOMAIN + '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
 STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
