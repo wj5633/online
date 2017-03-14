@@ -97,9 +97,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'online',
-        'HOST': '',
+        'HOST': '192.168.0.106',
         'PORT': '3306',
-        'USER': 'root',
+        'USER': 'wangjie',
         'PASSWORD': '123456',
     }
 }
@@ -147,10 +147,10 @@ QINIU_SECURE_URL = False
 PREFIX_URL = 'http://'
 
 STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + '/media/'
