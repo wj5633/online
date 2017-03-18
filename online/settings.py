@@ -146,17 +146,18 @@ QINIU_SECURE_URL = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 PREFIX_URL = 'http://'
 
-STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+
+STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
+# STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 EMAIL_HOST = "smtp.163.com"
@@ -166,3 +167,10 @@ EMAIL_HOST_PASSWORD = 'wj4766'
 EMAIL_USE_TLS = False
 EMAIL_FROM = "wangjie5633@163.com"
 
+
+# Broker
+BROKER_URL = 'redis://127.0.0.1:6379/0'
+BROKER_TRANSPORT = 'redis'
+
+SITE_NAME = '127.0.0.1:8000'
+# SITE_NAME = '54noob.com'

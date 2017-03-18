@@ -71,7 +71,7 @@
                                 <li data-value="teacher">授课教师</li>
                             </ul>
                         </div>
-                        <input id="search_keywords" class="fl" type="text" value="" placeholder="请输入搜索内容"/>
+                        <input id="search_keywords" class="fl" type="text" value="{{ search_keywords|default_if_none:'' }}" placeholder="请输入搜索内容"/>
                         <img class="search_btn fr" id="jsSearchBtn" src="{% static 'images/search_btn.png' %}"/>
                     </div>
                 </div>

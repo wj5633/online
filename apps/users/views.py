@@ -17,7 +17,7 @@ from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from courses.models import Course
 from operation.models import UserCourse, UserFavorite, UserMessage
 from organization.models import CourseOrg, Teacher
-from utils.email_send import send_register_email
+from .tasks import send_register_email
 from utils.mixin_utils import LoginRequireMixin
 from .models import UserProfile, EmailVerifyRecord, Banner
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyForm, UploadImageForm, UserInfoForm
@@ -120,11 +120,11 @@ class RegisterView(View):
 
             # send message
             user_message = UserMessage()
-            user_message.user = user_profile
+            user_message.user = user_profile.id
             user_message.message = "欢迎注册"
             user_message.save()
 
-            send_register_email(user_name, "register")
+            send_register_email.delay(user_name, "register")
             return render(request, 'login.html', {'register_form': register_form})
         else:
             return render(request, 'register.html', {'register_form': register_form})
@@ -141,7 +141,7 @@ class ForgetPwdView(View):
             email = request.POST.get('email', '')
             # if not UserProfile.objects.filter(email=email):
             #     return render(request, 'forgetpwd.html', {'forget_form': forget_form, 'msg': "邮箱未注册"})
-            send_register_email(email, 'forget')
+            send_register_email.delay(email, 'forget')
             return render(request, 'send_sucess.html')
         else:
             return render(request, 'forgetpwd.html', {'forget_form': forget_form})
@@ -234,7 +234,7 @@ class SendEmailCodeView(LoginRequireMixin, View):
 
         if UserProfile.objects.filter(email=email):
             return HttpResponse('{"status":"fail", "email":"邮箱已注册"}', content_type='application/json')
-        send_register_email(email, 'update_email')
+        send_register_email.delay(email, 'update_email')
 
         return HttpResponse('{"status":"success"}', content_type='application/json')
 

@@ -1,9 +1,8 @@
-.idea
-.idea/*
-__pycache__
+__pycache__/
 __pycache__/*
 *.pyc
 migrations
 migrations/*
-media
-media/*
+.idea/
+
+
