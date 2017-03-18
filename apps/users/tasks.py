@@ -9,7 +9,7 @@ from django.core.mail import send_mail
 from online.settings import EMAIL_FROM, SITE_NAME
 from users.models import EmailVerifyRecord
 
-from online.celery_ag import app
+from online.celery import app
 
 
 @app.task

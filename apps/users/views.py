@@ -120,7 +120,7 @@ class RegisterView(View):
 
             # send message
             user_message = UserMessage()
-            user_message.user = user_profile
+            user_message.user = user_profile.id
             user_message.message = "欢迎注册"
             user_message.save()
 

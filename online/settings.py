@@ -168,7 +168,7 @@ EMAIL_USE_TLS = False
 EMAIL_FROM = "wangjie5633@163.com"
 
 
-# 配置Broker
+# Broker
 BROKER_URL = 'redis://127.0.0.1:6379/0'
 BROKER_TRANSPORT = 'redis'
 
