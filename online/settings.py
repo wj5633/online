@@ -166,7 +166,7 @@ EMAIL_HOST_USER = "wangjie5633@163.com"
 EMAIL_HOST_PASSWORD = 'wj4766'
 EMAIL_USE_TLS = False
 EMAIL_FROM = "wangjie5633@163.com"
-
+EMAIL_BACKEND = "django_smtp_ssl.SSLEmailBackend"
 
 # Broker
 BROKER_URL = 'redis://127.0.0.1:6379/0'
