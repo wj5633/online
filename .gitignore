@@ -3,4 +3,5 @@ __pycache__/*
 migrations/*
 .idea/
 static/*
-
+online/Scripts/
+online/__pycache__/
