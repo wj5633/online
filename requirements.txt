@@ -21,3 +21,4 @@ requests==2.13.0
 six==1.10.0
 vine==1.1.3
 xadmin==0.6.1
+django-smtp-ssl==1.0
