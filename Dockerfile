@@ -11,7 +11,13 @@ RUN pip install -r requirements.txt
 
 RUN pip install uwsgi
 
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+
 RUN groupadd -r django && useradd -r -g django django
+
+RUN chown -R django /online && chmod +x entrypoint.sh && chown django entrypoint.sh
+
+USER django
 
 WORKDIR /online
 
