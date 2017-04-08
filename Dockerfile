@@ -23,5 +23,4 @@ USER django
 
 WORKDIR /online
 
-ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/bin/sh","run.sh"]
