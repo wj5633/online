@@ -97,7 +97,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'online',
-        'HOST': '',
+        'HOST': 'mysql',
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': '123456',
@@ -170,7 +170,7 @@ EMAIL_BACKEND = "django_smtp_ssl.SSLEmailBackend"
 
 
 # Broker
-BROKER_URL = 'redis://127.0.0.1:6379/0'
+BROKER_URL = 'redis://redis:6379/0'
 BROKER_TRANSPORT = 'redis'
 
 SITE_NAME = '127.0.0.1:8000'
