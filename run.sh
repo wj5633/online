@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-uwsgi -i /online/conf/mx_uwsgi.ini  &
+uwsgi -i /online/conf/mx_uwsgi.ini
 
 cd /online
 
-celery -A online worker -l info  &
+celery -A online worker -l info
