@@ -10,9 +10,11 @@ from django.conf import settings
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'online.settings')
 django.setup()
+BROKER_URL = 'redis://redis:6379/0'
+BACKEND_URL = 'redis://redis:6379/1'
 
-app = Celery('online')
-app.conf.result_backend = 'redis://redis:6379/0'
+app = Celery('online', broker=BROKER_URL)
+app.conf.result_backend = BACKEND_URL
 
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)

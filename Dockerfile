@@ -12,5 +12,3 @@ RUN pip install -r /tmp/requirements.txt  \
 EXPOSE 8000
 
 WORKDIR /online
-
-CMD ["/bin/sh","run.sh"]
