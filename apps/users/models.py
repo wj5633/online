@@ -52,6 +52,9 @@ class Banner(models.Model):
     index = models.IntegerField(default=100, verbose_name="顺序")
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
+    def __unicode__(self):
+        return '{0}'.format(self.title)
+
     class Meta:
         db_table = "mx_banner"
         verbose_name = "轮播图"
