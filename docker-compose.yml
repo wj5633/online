@@ -34,7 +34,7 @@ mx_nginx:
 mx_online:
   restart: always
   build: .
-  expose:
+  ports:
     - "8000:8000"
   volumes:
     - .:/online
