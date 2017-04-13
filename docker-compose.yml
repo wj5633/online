@@ -1,0 +1,56 @@
+mx_mysql:
+  restart: always
+  image: mysql:5.6
+  volumes:
+    - /root/data/mysql:/var/lib/mysql
+    - ./conf/:/etc/mysql/conf.d
+  ports:
+    - "3306:3306"
+  environment:
+    - MYSQL_DATABASE=online
+    - MYSQL_ROOT_PASSWORD=123456
+  
+mx_redis:
+  restart: always
+  image: redis:3.2
+  volumes:
+    - /root/data/redis:/data
+  ports:
+    - "6379:6379"
+  command: redis-server --appendonly yes
+
+mx_nginx:
+  restart: always
+  image: nginx
+  ports:
+    - "80:80"
+  volumes:
+    - ./conf/mx_nginx.conf:/etc/nginx/conf.d/mx_nginx.conf
+  volumes_from:
+    - mx_online
+  links:
+    - mx_online:web
+
+mx_online:
+  restart: always
+  build: .
+  expose:
+    - "8000:8000"
+  volumes:
+    - .:/online
+  links:
+    - mx_mysql:mysql
+    - mx_redis:redis
+  command: uwsgi -s :8000 -w online.wsgi -p 3
+
+mx_celery:
+  restart: always
+  build: .
+  volumes_from:
+    - mx_online
+  links:
+    - mx_mysql:mysql
+    - mx_redis:redis
+  command: celery -A online worker -l info
+
+
