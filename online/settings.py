@@ -26,6 +26,7 @@ SECRET_KEY = 'uo7xxfb%z92cd^=x+h#&6ceh)tie-urb1o5lyo%&!biv710g+c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 import getpass
+
 if os.name == 'nt':
     DEBUG = True
 else:
@@ -96,11 +97,9 @@ WSGI_APPLICATION = 'online.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'online',
-        'HOST': 'mysql',
-        'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': '123456',
+        'OPTIONS': {
+            'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
+        },
     }
 }
 
@@ -167,7 +166,6 @@ EMAIL_HOST_PASSWORD = 'wj4766'
 EMAIL_USE_TLS = True
 EMAIL_FROM = "wangjie5633@163.com"
 EMAIL_BACKEND = "django_smtp_ssl.SSLEmailBackend"
-
 
 # Broker
 BROKER_URL = 'redis://redis:6379/0'
