@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 import sys
+import getpass
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,6 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = 'uo7xxfb%z92cd^=x+h#&6ceh)tie-urb1o5lyo%&!biv710g+c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-import getpass
 
 if os.name == 'nt':
     DEBUG = True
@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'captcha',
     'pure_pagination',
     'DjangoUeditor',
+    'rest_framework',
+    'online_api_v1'
 ]
 
 AUTH_USER_MODEL = "users.UserProfile"
@@ -152,9 +154,9 @@ DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
 
 STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
 # STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
