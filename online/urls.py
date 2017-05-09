@@ -21,6 +21,7 @@ from xadmin.plugins import xversion
 
 # from online.settings import MEDIA_ROOT
 # from online.settings import STATIC_ROOT
+from online_api_v1.views import SwaggerSchemaView
 from users.views import LoginView, RegisterView, ActiveUserView, IndexView
 from users.views import ForgetPwdView, ResetView, ModifyView, LogoutView
 
@@ -54,7 +55,9 @@ urlpatterns = [
     url(r'^ueditor/', include('DjangoUeditor.urls')),
 
     # rest api v1
-    url(r'^api/v1/', include('online_api_v1.urls', namespace='api_v1')),
+    url(r'^api_v1/', include('online_api_v1.urls', namespace='api_v1')),
+
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 handler404 = 'users.views.page_not_found'
