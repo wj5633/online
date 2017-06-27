@@ -1,6 +1,5 @@
 # online
 ### (一)部署
--
 ### python环境
 - python == 2.7.13
 - django == 1.9.5
@@ -12,7 +11,7 @@
 - python manage.py runserver 
 ### nginx+uwsgi启动
 - cd ~/online
-- ln -c conf/mx_nginx.conf /etc/ /etc/nginx/conf.d
+- ln -c ~/online/conf/mx_nginx.conf /etc/nginx/conf.d
 - uwsgi -i conf/mx_uwsgi.ini
 
 (二)Docker-compose部署
