@@ -14,6 +14,7 @@ class UserProfile(AbstractUser):
     address = models.CharField("地址", max_length=100, default="")
     mobile = models.CharField("手机号", max_length=11, null=True, blank=True)
     image = models.ImageField("头像", upload_to="image/%Y/%m", default="image/default.png", max_length=100)
+    openid = models.CharField("微信openid", max_length=100, default="")
 
     class Meta:
         db_table = "mx_user"
