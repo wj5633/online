@@ -5,3 +5,4 @@ migrations/*
 static/*
 online/Scripts/
 online/__pycache__/
+my.cnf
