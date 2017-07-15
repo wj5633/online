@@ -1,0 +1,19 @@
+{% load staticfiles %}  
+  
+   <link  type="text/css"  rel="stylesheet" href="{% static  'ueditor/themes/default/ueditor.css'%}" />  
+   <script type="text/javascript" src="{% static 'ueditor/ueditor.all.js' %}" ></script>  
+   <script type="text/javascript" src="{% static 'ueditor/ueditor.config.js'%}" ></script>  
+   
+ <script type="text/plain" id="myEditor" name="{{ name }}">  
+     {% autoescape off %}  
+{{ value|default_if_none:'' }}  
+     {% endautoescape %}  
+ </script>   
+   
+ <script type="text/javascript">   
+     var editor = new UE.ui.Editor({  
+  
+              });  
+    editor.render("myEditor");  
+  
+    </script> 
