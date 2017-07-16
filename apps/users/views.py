@@ -11,6 +11,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
+from django.views.decorators.cache import cache_page
 from django.views.generic.base import View
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
@@ -47,6 +48,7 @@ class LogoutView(View):
 
 
 class LoginView(View):
+    @cache_page(60 * 15)
     def get(self, request):
         return render(request, 'login.html', {})
 
@@ -100,6 +102,7 @@ class ActiveUserView(View):
 
 
 class RegisterView(View):
+    @cache_page(60 * 15)
     def get(self, request):
         register_form = RegisterForm()
         return render(request, 'register.html', {'register_form': register_form})
@@ -131,6 +134,7 @@ class RegisterView(View):
 
 
 class ForgetPwdView(View):
+    @cache_page(60 * 15)
     def get(self, request):
         forget_form = ForgetForm()
         return render(request, "forgetpwd.html", {'forget_form': forget_form})
@@ -262,6 +266,7 @@ class MyCourseView(LoginRequireMixin, View):
     """
     我的课程
     """
+    @cache_page(60 * 15)
     def get(self, request):
         user_courses = UserCourse.objects.filter(user=request.user)
         return render(request, 'usercenter-mycourse.html', locals())
@@ -271,6 +276,8 @@ class MyFavOrgView(LoginRequireMixin, View):
     """
     我收藏的课程机构
     """
+
+    @cache_page(60 * 15)
     def get(self, request):
         org_list = []
         fav_orgs = UserFavorite.objects.filter(user=request.user, fav_type=2)
@@ -285,6 +292,8 @@ class MyFavTeacherView(LoginRequireMixin, View):
     """
     我收藏的讲师
     """
+
+    @cache_page(60 * 15)
     def get(self, request):
         teacher_list = []
         fav_teachers = UserFavorite.objects.filter(user=request.user, fav_type=3)

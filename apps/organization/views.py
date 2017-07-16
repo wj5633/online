@@ -4,6 +4,7 @@ import json
 
 from django.db.models import Q
 from django.shortcuts import render
+from django.views.decorators.cache import cache_page
 from django.views.generic import View
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
@@ -19,7 +20,7 @@ class OrgView(View):
     """
     课程机构列表
     """
-
+    @cache_page(60 * 15)
     def get(self, request):
         all_orgs = CourseOrg.objects.all()
         all_citys = CityDict.objects.all()
@@ -86,6 +87,7 @@ class OrgHomeView(View):
     """
     机构首页
     """
+    @cache_page(60 * 15)
     def get(self, request, org_id):
         current_page = 'home'
         course_org = CourseOrg.objects.get(id=int(org_id))
@@ -104,7 +106,7 @@ class OrgCourseView(View):
     """
     机构课程列表
     """
-
+    @cache_page(60 * 15)
     def get(self, request, org_id):
         current_page = 'course'
         course_org = CourseOrg.objects.get(id=int(org_id))
@@ -120,7 +122,7 @@ class OrgDescView(View):
     """
     机构介绍
     """
-
+    @cache_page(60 * 15)
     def get(self, request, org_id):
         current_page = 'desc'
         course_org = CourseOrg.objects.get(id=int(org_id))
@@ -135,6 +137,7 @@ class OrgTeacherView(View):
     """
     机构讲师列表
     """
+    @cache_page(60 * 15)
     def get(self, request, org_id):
         current_page = 'teacher'
         course_org = CourseOrg.objects.get(id=int(org_id))
@@ -216,6 +219,7 @@ class TeacherListView(View):
     """
     讲师列表页
     """
+    @cache_page(60 * 15)
     def get(self, request):
         all_teachers = Teacher.objects.all()
 
@@ -249,6 +253,8 @@ class TeacherDetailView(View):
     """
         讲师详情页
     """
+
+    @cache_page(60 * 15)
     def get(self, request, teacher_id):
         teacher = Teacher.objects.get(id=int(teacher_id))
         teacher.click_nums += 1
