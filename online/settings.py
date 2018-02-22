@@ -180,10 +180,10 @@ STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 465
-EMAIL_HOST_USER = "wangjie5633@163.com"
-EMAIL_HOST_PASSWORD = 'wj4766'
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
-EMAIL_FROM = "wangjie5633@163.com"
+EMAIL_FROM = ""
 EMAIL_BACKEND = "django_smtp_ssl.SSLEmailBackend"
 
 # Broker
