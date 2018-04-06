@@ -32,7 +32,7 @@ SECRET_KEY = 'uo7xxfb%z92cd^=x+h#&6ceh)tie-urb1o5lyo%&!biv710g+c'
 if os.name == 'nt':
     DEBUG = True
 else:
-    DEBUG = False
+    DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Application definition

@@ -48,8 +48,8 @@ class LogoutView(View):
 
 
 class LoginView(View):
-    @cache_page(60 * 15)
     def get(self, request):
+        print(11)
         return render(request, 'login.html', {})
 
     def post(self, request):
@@ -102,7 +102,6 @@ class ActiveUserView(View):
 
 
 class RegisterView(View):
-    @cache_page(60 * 15)
     def get(self, request):
         register_form = RegisterForm()
         return render(request, 'register.html', {'register_form': register_form})
@@ -134,7 +133,6 @@ class RegisterView(View):
 
 
 class ForgetPwdView(View):
-    @cache_page(60 * 15)
     def get(self, request):
         forget_form = ForgetForm()
         return render(request, "forgetpwd.html", {'forget_form': forget_form})
@@ -277,7 +275,6 @@ class MyFavOrgView(LoginRequireMixin, View):
     我收藏的课程机构
     """
 
-    @cache_page(60 * 15)
     def get(self, request):
         org_list = []
         fav_orgs = UserFavorite.objects.filter(user=request.user, fav_type=2)
@@ -293,7 +290,6 @@ class MyFavTeacherView(LoginRequireMixin, View):
     我收藏的讲师
     """
 
-    @cache_page(60 * 15)
     def get(self, request):
         teacher_list = []
         fav_teachers = UserFavorite.objects.filter(user=request.user, fav_type=3)
