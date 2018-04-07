@@ -373,12 +373,12 @@ CREATE TABLE `mx_banner` (
 -- ----------------------------
 -- Records of mx_banner
 -- ----------------------------
-INSERT INTO `mx_banner` VALUES ('3', 'python1', 'banner/2017/03/python1.jpg', 'http://www.puthondoc.com', '1', '2017-03-12 23:04:00.000000');
-INSERT INTO `mx_banner` VALUES ('4', 'python2', 'banner/2017/03/python2.jpg', 'http://www.puthondoc.com', '2', '2017-03-12 23:11:00.000000');
-INSERT INTO `mx_banner` VALUES ('5', 'python3', 'banner/2017/03/pythno3.jpg', 'http://www.puthondoc.com', '3', '2017-03-12 23:12:00.000000');
-INSERT INTO `mx_banner` VALUES ('6', 'python4', 'banner/2017/03/pythno4.jpg', 'http://www.puthondoc.com', '4', '2017-03-12 23:12:00.000000');
-INSERT INTO `mx_banner` VALUES ('7', 'python5', 'banner/2017/03/python5.jpg', 'http://www.puthondoc.com', '5', '2017-03-12 23:12:00.000000');
-INSERT INTO `mx_banner` VALUES ('8', 'python6', 'banner/2017/03/python6.jpg', 'http://www.puthondoc.com', '6', '2017-03-12 23:12:00.000000');
+INSERT INTO `mx_banner` VALUES ('3', 'python1', 'banner/2017/03/python1.jpg', 'http://www.pythondoc.com', '1', '2017-03-12 23:04:00.000000');
+INSERT INTO `mx_banner` VALUES ('4', 'python2', 'banner/2017/03/python2.jpg', 'http://www.pythondoc.com', '2', '2017-03-12 23:11:00.000000');
+INSERT INTO `mx_banner` VALUES ('5', 'python3', 'banner/2017/03/pythno3.jpg', 'http://www.pythondoc.com', '3', '2017-03-12 23:12:00.000000');
+INSERT INTO `mx_banner` VALUES ('6', 'python4', 'banner/2017/03/pythno4.jpg', 'http://www.pythondoc.com', '4', '2017-03-12 23:12:00.000000');
+INSERT INTO `mx_banner` VALUES ('7', 'python5', 'banner/2017/03/python5.jpg', 'http://www.pythondoc.com', '5', '2017-03-12 23:12:00.000000');
+INSERT INTO `mx_banner` VALUES ('8', 'python6', 'banner/2017/03/python6.jpg', 'http://www.pythondoc.com', '6', '2017-03-12 23:12:00.000000');
 
 -- ----------------------------
 -- Table structure for mx_city
