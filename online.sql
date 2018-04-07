@@ -701,6 +701,7 @@ CREATE TABLE `mx_user` (
   `gender` varchar(10) NOT NULL,
   `address` varchar(100) NOT NULL,
   `mobile` varchar(11) DEFAULT NULL,
+  `openid` varchar(50) DEFAULT NULL,
   `image` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE
