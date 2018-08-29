@@ -1,15 +1,11 @@
 # -*- coding:utf-8 -*-
 from __future__ import unicode_literals
-
 from datetime import datetime
 
-from django.contrib.auth import get_user_model
 from django.db import models
 
 from courses.models import Course
 from users.models import UserProfile
-
-User = get_user_model()
 
 
 class UserAsk(models.Model):
@@ -29,7 +25,7 @@ class UserAsk(models.Model):
 
 class CourseComments(models.Model):
     # 课程评论
-    user = models.ForeignKey(User, verbose_name="用户名")
+    user = models.ForeignKey(UserProfile, verbose_name="用户名")
     course = models.ForeignKey(Course, verbose_name="课程名")
     comments = models.CharField(max_length=200, verbose_name="评论")
 
@@ -45,7 +41,7 @@ class CourseComments(models.Model):
 
 
 class UserFavorite(models.Model):
-    user = models.ForeignKey(User, verbose_name="用户名")
+    user = models.ForeignKey(UserProfile, verbose_name="用户名")
     fav_id = models.IntegerField(default=0, verbose_name="收藏ID")
     fav_type = models.IntegerField(verbose_name="收藏类型",
                                    choices=((1, "课程"), (2, "课程机构"), (3, "讲师")), default=1)
@@ -76,7 +72,7 @@ class UserMessage(models.Model):
 
 
 class UserCourse(models.Model):
-    user = models.ForeignKey(User, verbose_name="用户名")
+    user = models.ForeignKey(UserProfile, verbose_name="用户名")
     course = models.ForeignKey(Course, verbose_name="课程名")
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
