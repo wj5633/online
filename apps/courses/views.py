@@ -96,7 +96,7 @@ class CourseInfoView(LoginRequireMixin, View):
 
         # 相关课程
         user_coursers = UserCourse.objects.filter(course=course)
-        user_ids = [user_courser.user.id for user_courser in user_coursers]
+        user_ids = [user_courser.user.id for user_courser in user_coursers if user_coursers]
         all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
         course_ids = [all_user_course.course.id for all_user_course in all_user_courses]
         relate_courses = Course.objects.filter(id__in=course_ids).order_by("-click_nums")[:5]
