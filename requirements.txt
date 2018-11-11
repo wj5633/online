@@ -29,7 +29,7 @@ PyMySQL==0.7.10
 pytz==2016.10
 qiniu==7.1.1
 redis==2.10.5
-requests==2.13.0
+requests==2.20.0
 simplejson==3.10.0
 six==1.10.0
 uritemplate==3.0.0
